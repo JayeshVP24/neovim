@@ -7,6 +7,11 @@ return {
 		"MunifTanjim/nui.nvim",
 	},
 	config = function()
-		require('neo-tree').setup {}
+		require('neo-tree').setup {
+			window = {
+				width = 30,
+			}
+
+		}
 	end,
 }

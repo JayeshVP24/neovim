@@ -29,6 +29,8 @@ require('lazy').setup({
 	-- Detect tabstop and shiftwidth automatically
 	'tpope/vim-sleuth',
 
+	-- Harpoon
+	'ThePrimeagen/harpoon',
 	-- NOTE: This is where your plugins related to LSP can be installed.
 	--  The configuration is done below. Search for lspconfig to find it below.
 	{
@@ -150,7 +152,8 @@ require('lazy').setup({
 		},
 		build = ':TSUpdate',
 	},
-
+	'windwp/nvim-autopairs',
+	'nvim-neo-tree/neo-tree.nvim',
 	-- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
 	--       These are some example plugins that I've included in the kickstart repository.
 	--       Uncomment any of the lines below to enable them.
