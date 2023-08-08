@@ -56,8 +56,8 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
-  -- tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+  tsserver = {},
+  html = { filetypes = { 'html', 'twig', 'hbs' } },
 
   lua_ls = {
     Lua = {
@@ -91,6 +91,8 @@ mason_lspconfig.setup_handlers {
     }
   end
 }
+
+require 'lspconfig'.tsserver.setup {}
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
