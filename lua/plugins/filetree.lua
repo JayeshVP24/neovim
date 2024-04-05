@@ -9,9 +9,16 @@ return {
 	config = function()
 		require('neo-tree').setup {
 			window = {
-				width = 30,
-			}
-
+				width = 20,
+			},
+			event_handlers = {
+				{
+					event = "BufEnter",
+					handler = function(_)
+						require("neo-tree.sources.manager").focus(true)
+					end
+				},
+			},
 		}
 	end,
 }

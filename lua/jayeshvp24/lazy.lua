@@ -31,21 +31,34 @@ require('lazy').setup({
 
 	-- Harpoon
 	'ThePrimeagen/harpoon',
+	{
+		"olexsmir/gopher.nvim",
+		ft = "go",
+		config = function(_, opts)
+			require("gopher").setup(opts)
+		end,
+		build = function()
+			vim.cmd [[silent! GoInstallDeps]]
+		end
+	},
+	-- 'neoclide/coc.nvim',
 	-- NOTE: This is where your plugins related to LSP can be installed.
 	--  The configuration is done below. Search for lspconfig to find it below.
 	{
 		-- LSP Configuration & Plugins
 		'neovim/nvim-lspconfig',
 		dependencies = {
-			-- Automatically install LSPs to stdpath for neovim
+			-- 	-- Automatically install LSPs to stdpath for neovim
 			{ 'williamboman/mason.nvim', config = true },
+			"mfussenegger/nvim-dap",
+			"jay-babu/mason-nvim-dap.nvim",
 			'williamboman/mason-lspconfig.nvim',
-
-			-- Useful status updates for LSP
-			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+			--
+			-- 	-- Useful status updates for LSP
+			-- 	-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
 			{ 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
-
-			-- Additional lua configuration, makes nvim stuff amazing!
+			--
+			-- 	-- Additional lua configuration, makes nvim stuff amazing!
 			'folke/neodev.nvim',
 		},
 	},
@@ -106,7 +119,7 @@ require('lazy').setup({
 		-- See `:help lualine.txt`
 		opts = {
 			options = {
-				icons_enabled = false,
+				icons_enabled = true,
 				theme = 'onedark',
 				component_separators = '|',
 				section_separators = '',

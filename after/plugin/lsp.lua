@@ -1,5 +1,5 @@
 -- [[ Configure LSP ]]
---  This function gets run when an LSP connects to a particular buffer.
+-- This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
@@ -53,7 +53,14 @@ end
 --  define the property 'filetypes' to the map in question.
 local servers = {
   -- clangd = {},
-  -- gopls = {},
+  gopls = {
+    gopls = {
+      usePlaceholders = true,
+      analyses = {
+        unusedparams = true
+      }
+    }
+  },
   -- pyright = {},
   -- rust_analyzer = {},
   tsserver = {},
@@ -67,6 +74,9 @@ local servers = {
   },
 }
 
+-- require'lspconfig'.tsserver.setup{}
+-- require'lspconfig'.svelte.setup{}
+
 -- Setup neovim lua configuration
 require('neodev').setup()
 
@@ -76,11 +86,11 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
-
+--
 mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
 }
-
+--
 mason_lspconfig.setup_handlers {
   function(server_name)
     require('lspconfig')[server_name].setup {
@@ -91,8 +101,8 @@ mason_lspconfig.setup_handlers {
     }
   end
 }
-
-require 'lspconfig'.tsserver.setup {}
+--
+--require 'lspconfig'.tsserver.setup {}
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
@@ -117,15 +127,15 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
+    -- ['<Tab>'] = cmp.mapping(function(fallback)
+    --   if cmp.visible() then
+    --     cmp.select_next_item()
+    --   elseif luasnip.expand_or_locally_jumpable() then
+    --     luasnip.expand_or_jump()
+    --   else
+    --     fallback()
+    --   end
+    -- end, { 'i', 's' }),
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
